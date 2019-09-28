@@ -21,6 +21,7 @@ public class SampleAdapter extends FragmentStatePagerAdapter {
     }
     @Override
     public Fragment getItem(int position) {
+        UserFeedback.showShort( "SamplerAdapter: getItem: " + position);
         return (EditorFragment.newInstance(position));
     }
     @Override
