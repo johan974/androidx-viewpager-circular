@@ -10,6 +10,7 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 
 //public class SampleAdapter extends FragmentPagerAdapter {
 public class SampleAdapter extends FragmentStatePagerAdapter {
+    private int numberOfPages = 10;
     Context ctxt = null;
     public SampleAdapter(Context ctxt, FragmentManager mgr) {
         super(mgr);
@@ -17,12 +18,19 @@ public class SampleAdapter extends FragmentStatePagerAdapter {
     }
     @Override
     public int getCount() {
-        return (10);
+        return (numberOfPages + 2);
     }
+
     @Override
-    public Fragment getItem(int position) {
-        UserFeedback.showShort( "SamplerAdapter: getItem: " + position);
-        return (EditorFragment.newInstance(position));
+    public Fragment getItem(final int position) {
+        UserFeedback.showShort("SamplerAdapter: getItem: " + position);
+        if (position == 0) {
+            return (EditorFragment.newInstance(numberOfPages - 1));
+        } else if (position == numberOfPages + 1) {
+            return (EditorFragment.newInstance(0));
+        } else {
+            return (EditorFragment.newInstance(position - 1));
+        }
     }
     @Override
     public String getPageTitle(int position) {
